@@ -1,17 +1,20 @@
-
-
 <div class="jumbotron" style="background:url(<%= asset_path "001_1280_768.jpg" %>); background-size:cover;">
-<div class="container">
-      <div class="d-flex align-items-center justify-content-center" style="height:400px;">
-        <h1 class"title"><strong>Favo place</strong></h1>
-      </div>
-      <div class="d-flex justify-content-center">
-        <p>~その場所を綴るSNSサイト~</p>
-      </div>
-      <div class="d-flex justify-content-center">
-        <span>新規登録</span><span>ログイン</span>
-      </div>
-      </div>
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center" style="height:400px;">
+      <h1 class"title"><strong>Favo place</strong></h1>
     </div>
+    <div class="d-flex justify-content-center">
+      <p>~その場所を綴るSNSサイト~</p>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= link_to "新規登録", new_user_registration_path, class:"btn btn-success mr-5" %>
+      <%= link_to "ログイン", new_user_session_path, class:"btn btn-success" %>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= link_to posts_path, class:"btn btn-outline default btn-sm" do %>
+        ログインなしで投稿を見る
+      <% end %>
+    </div>
+  </div>
 </div>
 

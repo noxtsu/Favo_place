@@ -12,14 +12,14 @@ end
   #get 'relationships/follows'
   #get 'relationships/followers'
   #get 'relationships/show'
-  
+
 
   get 'users/unsubscribe'
   get 'users/withdraw'
-  
+
   resources :posts do
   resources :comments, only:[:create, :destroy]
-  resource :favorites, only: [:create, :destroy] 
+  resource :favorites, only: [:create, :destroy]
   end
   #get 'posts/index'
   #get 'posts/show'
@@ -31,7 +31,7 @@ end
 
   #get 'comments/create'
   #get 'comments/destroy'
-  
+
   #get 'favorites/create'
   #get 'favorites/destroy'
 
