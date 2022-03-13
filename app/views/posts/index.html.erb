@@ -1,18 +1,23 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-sm-2" style="background-color: orange;">
       <div class="sidebar">
         <%#サイドバー作る%>
       </div>
     </div>
+
+
+
+
+
     <div class="col-sm-10">
       <%#ここからマップ%>
       <h2>gmap</h2>
       <div id='map'></div>
       <style>
-      #map {height: 1000px; width: auto;}
+      #map {height: 600px; width: auto;}
       </style>
-      
+
       <script>
       let map
       function initMap(){
@@ -32,11 +37,11 @@
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>
     </div>
 <%#ここまでマップ%>
-      
-      
-      
-      
-      
+
+
+
+
+
 
 
 
