@@ -3,11 +3,11 @@
 <%= form_with(model: @post, local: true) do |f| %>
   <div class="actions">
     <%= f.label :text,"内容" %>
-    <%= f.text_field :body %>
+    <%= f.text_area :text %>
     <%= f.label :latitude,"緯度" %>
     <%= f.text_field :latitude,:value =>"緯度", id: :latitude %>
-    <%= f.label :lngitude,"経度" %>
-    <%= f.text_field :lngitude,:value =>"経度", id: :lngitude %>
+    <%= f.label :longitude,"経度" %>
+    <%= f.text_field :longitude,:value =>"経度", id: :longitude %>
     <%= f.submit %>
   </div>
 <% end %>
@@ -76,8 +76,8 @@ function codeAddress(){
     } else {
       alert('該当する結果がありませんでした：' + status);
     }
-  });   
+  });
 }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0Y&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>

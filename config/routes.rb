@@ -12,8 +12,9 @@ end
   #get 'relationships/follows'
   #get 'relationships/followers'
   #get 'relationships/show'
-
-
+  get 'users/show' => 'users#show', as: 'mypage'
+  get 'users/edit' => 'users#edit'
+  patch 'users' => 'customers#update'
   get 'users/unsubscribe'
   get 'users/withdraw'
 

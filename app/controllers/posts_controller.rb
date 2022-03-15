@@ -6,10 +6,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.
+    @post = Post.new
   end
 
   def create
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    @post.save
+    redirect_to posts_path
   end
 
   def edit
@@ -20,4 +24,10 @@ class PostsController < ApplicationController
 
   def destroy
   end
+
+
+  def post_params
+    params.require(:post).permit(:place_image, :text, :address, :latitude, :longitude)
+  end
+
 end
