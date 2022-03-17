@@ -4,49 +4,71 @@
     <div class="d-flex align-items-center justify-content-center" style="height:510px;">
          <div class="registrations">
 
-
-<h2>新規登録</h2>
-
+<body class="text-center">
+  <div class="row">
+    <div class="col-sm-6">
 <%= form_with model:@user, url: user_registration_path, local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
- <div class="row">
-  <div class="col-sm-4 field">
+  <div class="field">
     <%= f.label :名前 %>
-    <%= f.text_field :name, autofocus: true %>
   </div>
- </div>
 
-   <div class="row">
-  <div class="col-sm-4 field">
+  <div class="field">
     <%= f.label :ユーザー画像 %>
-  <%= f.attachment_field :user_image %>
-  </div>
  </div>
 
   <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :メールアドレス %>
   </div>
 
   <div class="field">
     <%= f.label :パスワード %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> 文字以上)</em>
-    <% end %><br />
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード（確認用） %>
+  </div>
+
+  </div>
+
+      <div class="col-sm-6">
+
+  <div class="field">
+    <%= f.text_field :name, autofocus: true %>
+ </div>
+
+  <div class="field">
+  <%= f.attachment_field :user_image %>
+ </div>
+
+  <div class="field">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :パスワード（確認用） %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
+
+  </div>
+    <div class="actions">
     <%= f.submit "登録", class:"btn btn-success" %>
   </div>
+
+
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+</body>
+
 </div>
 </div>
 </div>

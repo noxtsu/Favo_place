@@ -1,2 +1,52 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'posts/sidebar', posts: @posts %>
+
+    <div class="col-sm-8">
+      <h3 class="mt-3"><%= @user.name %>さんのページ</h3>
+
+      <%= link_to "会員情報編集", edit_user_path, class:"btn btn-success" %>
+  
+      <% @posts.each do |post| %>
+    
+      <h3><%= post.place_name %></h3>
+      <div class="d-flex flex-row bd-highlight mb-3">
+        <div><%= attachment_image_tag post, :place_image, :fill, 300, 300, format:'jpeg' %></div>
+  
+        <div id='map'></div>
+        <style>
+        #map {height: 300px; width: 300px;}
+        </style>
+
+        <script>
+        let map
+        function initMap(){
+          geocoder = new google.maps.Geocoder()
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 35.0034, lng:135.7785},
+            zoom: 12,
+          });
+          marker = new google.maps.Marker({
+            position:  {lat: 40.7828, lng:-73.9653},
+            map: map
+          });
+        }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>
+      </div>
+      <div class="col-sm-8">
+        <%= post.text %>
+      </div>
+      <% end %>
+      
+      <%= link_to post_path, class:"btn btn-outline-secondary" do %>
+    　　詳しく見る
+    　<% end %>
+      <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
+        編集する
+      <% end %>
+     
+  </div>
+</div>
+</div>
+

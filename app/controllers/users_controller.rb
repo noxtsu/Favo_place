@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   def show
+    @user = User.find(params[:id])
+    @posts = @user.posts
   end
 
   def edit
+    @user = current_user
   end
 
   def update
@@ -13,4 +16,11 @@ class UsersController < ApplicationController
 
   def withdraw
   end
+
+  private
+
+  def post_params
+    params.require(:user).permit(:name, :user_image, :is_active, :email, :password)
+  end
+
 end

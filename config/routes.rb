@@ -6,15 +6,18 @@ Rails.application.routes.draw do
     get :follows, :followers
   end
   resource :relationships, only: [:create, :destroy, :show]
-end
+  end
+
   #get 'relationships/create'
   #get 'relationships/destroy'
   #get 'relationships/follows'
   #get 'relationships/followers'
   #get 'relationships/show'
-  get 'users/show' => 'users#show', as: 'mypage'
-  get 'users/edit' => 'users#edit'
-  patch 'users' => 'customers#update'
+
+  #get 'users/show' => 'users#show', as: 'mypage'
+  #get 'users/edit' => 'users#edit'
+  #patch 'users' => 'customers#update'
+  resources :users, only: [:show, :edit, :update]
   get 'users/unsubscribe'
   get 'users/withdraw'
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_09_102351) do
+ActiveRecord::Schema.define(version: 2022_03_16_111749) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
@@ -29,7 +29,8 @@ ActiveRecord::Schema.define(version: 2022_03_09_102351) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "place_image", null: false
+    t.string "place_image_id", null: false
+    t.string "place_name", null: false
     t.text "text", null: false
     t.string "address"
     t.float "latitude"

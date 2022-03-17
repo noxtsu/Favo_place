@@ -1,41 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-2" style="background-color: orange;">
-      <div class="sidebar pt-5">
 
-        <% if user_signed_in? %>
-          <ul class="list-unstyled">
-            <li>
-              <%= link_to "マイページ", mypage_path, class:"btn btn-success" %>
-          　</li>
-            <li>
-              <%= link_to "投稿", new_post_path, class:"btn btn-success" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            </li>
-          </ul>  
-        <% else %>
-          <ul class="list-unstyled">
-            <li>
-              <p><strong>Wellcome gest user,<br>
-              Register as a person and<br>
-              post your memories!</strong></p>
-            </li>
-            <li>
-              <%= link_to "新規登録", new_user_registration_path %>
-            </li>
-            <li>
-              <%= link_to "ログイン", new_user_session_path %>
-            </li>
-          </ul>
-        <% end %>
-      </div> 
-    </div>
+    <%= render 'posts/sidebar', posts: @posts %>
 
     <div class="col-sm-10">
       <%#ここからマップ%>
-      <h2>gmap</h2>
+
       <div id='map'></div>
       <style>
       #map {height: 700px; width: auto;}
