@@ -4,13 +4,13 @@
 
 
       <div class="col-md-8">
-                 <div class="post border border-info rounded m-3 p-2">
+    　<div class="post border border-info rounded m-3 p-2">
       <h3><%= @post.place_name %></h3>
       <div class="d-flex flex-row bd-highlight mb-3">
         <div><%= attachment_image_tag @post, :place_image, :fill, 300, 300, format:'jpeg' %></div>
-
+        
         <div id='map' style="height: 300px; width: 300px;"></div>
-
+        
         <script>
         let map
         function initMap(){
