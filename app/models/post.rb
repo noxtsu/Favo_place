@@ -1,10 +1,14 @@
 class Post < ApplicationRecord
-
+  
+  attachment :place_image
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
-  attachment :place_image
+  has_many :favorites, dependent: :destroy
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
+
 
   validates :place_name, presence: true
   validates :place_image, presence: true
