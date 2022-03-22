@@ -4,8 +4,14 @@
 
     <div class="col-md-8">
       <div class="userdata m-3 p-2">
-        <h3><%= @user.name %>さんのページ</h3>
-        <%= link_to "会員情報編集", edit_user_path, class:"btn btn-success" %>
+              <%= attachment_image_tag current_user, :user_image, :fill, 60, 60, format:'jpeg', fallback: "no-icon.jpeg" %>
+          <h3><%= @user.name %>さんのページ</h3>
+        <div class="user-edit">
+          <% if user_signed_in? && @user == current_user %>
+          <%= link_to "アカウント情報編集", edit_user_path, class: "user-edit-btn" %>
+          <% end %>
+        </div>
+
       </div>
 
       <% @post.each do |post| %>
@@ -14,26 +20,7 @@
       <div class="d-flex flex-row bd-highlight mb-3">
         <div><%= attachment_image_tag post, :place_image, :fill, 300, 300, format:'jpeg' %></div>
 
-        <div id='map'></div>
-        <style>
-        #map {height: 300px; width: 300px;}
-        </style>
-
-        <script>
-        let map
-        function initMap(){
-          geocoder = new google.maps.Geocoder()
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: <%= post.latitude %>, lng: <% post.longitude %> },
-            zoom: 12,
-          });
-          marker = new google.maps.Marker({
-            position:  {lat: <%= post.latitude %>, lng: <% post.longitude %> },
-            map: map
-          });
-        }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>
+        <div id='map_<%= post.id %>' class="map"></div>
       </div>
       <div class="col-md-8">
         <%= post.text %>
@@ -44,7 +31,7 @@
         <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
           編集する
         <% end %>
-        </div>
+      </div>
       <% end %>
 
 
@@ -54,3 +41,27 @@
 </div>
 </div>
 
+<style>
+.map {height: 300px; width: 300px;}
+</style>
+
+<script>
+        // let map ~[];
+        function initMap(){
+          console.log('initMap');
+          geocoder = new google.maps.Geocoder()
+      <% @post.each do |post| %>
+          <% if post.latitude && post.longitude %>
+          var map = new google.maps.Map(document.getElementById('map_<%= post.id %>'), {
+            center: {lat: <%= post.latitude %>, lng: <%= post.longitude %> },
+            zoom: 12,
+          });
+          var marker = new google.maps.Marker({
+            position:  {lat: <%= post.latitude %>, lng: <%= post.longitude %> },
+            map: map
+          });
+          <% end %>
+      <% end %>
+        }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  devise_for :users do
+  #devise_for :users, controllers: {
+  # registrations: 'users/registrations',
+  # sessions: 'users/sessions'
+  #}
+ #  devise_for :users, controllers: {registrations: 'users/registrations'}
+  devise_for :users, controllers: {registrations: 'users/registrations'} do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   member do
     get :follows, :followers
@@ -23,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :posts do
   resources :comments, only:[:create, :destroy]
-  resources :favorites, only: [:create, :destroy]
+  resource :favorites, only: [:create, :destroy]
   end
   #get 'posts/index'
   #get 'posts/show'
