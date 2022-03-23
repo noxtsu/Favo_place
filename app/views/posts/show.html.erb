@@ -1,68 +1,68 @@
 <div class="container-fluid">
   <div class="row">
     <%= render 'posts/sidebar', posts: @posts %>
-
-
-      <div class="col-md-8">
+    <div class="col-md-9">
     　<div class="post border border-info rounded m-3 p-2">
-      <h3><%= @post.place_name %></h3>
-      <div class="d-flex flex-row bd-highlight mb-3">
-        <div><%= attachment_image_tag @post, :place_image, :fill, 300, 300, format:'jpeg' %></div>
-        
-        <div id='map' style="height: 300px; width: 300px;"></div>
-        
-    </div>
-      <div class="col-md-8">
-        <%= @post.text %>
-      </div>
-
-      <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
-        編集する
-      <% end %>
-      
-      
-  <% if @post.favorited_by?(current_user) %>
-    <p>
-      <%= link_to post_favorites_path(@post), method: :delete do %>
-        ♥<%= @post.favorites.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_favorites_path(@post), method: :post do %>
-        ♡<%= @post.favorites.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-
-
-    <div>
-      <p>コメント件数：<%= @post.comments.count %></p>
-      <% @post.comments.each do |comment| %>
-        <p></p>
-        <%= comment.user.name %><br>
-        <%= comment.comment %><br>
-        <%= comment.created_at.strftime('%Y/%m/%d') %>
-        
-        <% if comment.user == current_user %>
-        <div>
-          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+    　   <div class="post_userdata">
+    　     <h2><%= @post.place_name %></h2>
+    　     <h2><%= @post.user.name %></h2>
         </div>
+        <div class="d-flex flex-row bd-highlight mb-3">
+          <div><%= attachment_image_tag @post, :place_image, :fill, 300, 300, format:'jpeg' %></div>
+
+          <div id='map' style="height: 300px; width: 300px;"></div>
+
+        </div>
+        <div class="col-md-10">
+          <%= @post.text %>
+        </div>
+        <% if @post.user == current_user %>
+          <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
+            編集する
+          <% end %>
         <% end %>
-      <% end %>
-      </div>
-      
-      <div>
-      <%= form_with(model:[@post, @comment], local: true) do |f| %>
-        <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
-      <% end %>
-      </div>
-      <%= link_to user_path(current_user.id), class:"btn btn-outline-secondary" do %>
-        戻る
-      <% end %>
+
+        <% if @post.favorited_by?(current_user) %>
+          <p>
+            <%= link_to post_favorites_path(@post), method: :delete do %>
+              ♥<%= @post.favorites.count %> いいね
+            <% end %>
+          </p>
+          <% else %>
+          <p>
+            <%= link_to post_favorites_path(@post), method: :post do %>
+              ♡<%= @post.favorites.count %> いいね
+            <% end %>
+          </p>
+        <% end %>
+
+        <div>
+          <p>コメント件数：<%= @post.comments.count %></p>
+          <% @post.comments.each do |comment| %>
+            <p></p>
+            <%= comment.user.name %><br>
+            <%= comment.comment %><br>
+            <%= comment.created_at.strftime('%Y/%m/%d') %>
+
+            <% if comment.user == current_user %>
+            <div>
+              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+            </div>
+            <% end %>
+          <% end %>
+          </div>
+
+          <div>
+            <%= form_with(model:[@post, @comment], local: true) do |f| %>
+            <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
+            <%= f.submit "送信する" %>
+            <% end %>
+          </div>
+          <%= link_to user_path(current_user.id), class:"btn btn-outline-secondary" do %>
+            戻る
+          <% end %>
+          </div>
     </div>
-     </div>
 
   </div>
 </div>
@@ -88,4 +88,4 @@
           });
         }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>

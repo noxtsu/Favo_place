@@ -82,7 +82,7 @@
 }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
 
         <div class="input-small">
         <%= f.label :latitude,"緯度" %>
@@ -95,6 +95,10 @@
   <%= f.text_area :text, class: 'form-control',size: "20x10" %>
   <%= f.submit "更新する", class:"btn btn-success" %>
   <%= link_to "削除する", post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %>
+
+  
+  
+  <% end %>
 
 <% end %>
 

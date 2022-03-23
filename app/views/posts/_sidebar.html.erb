@@ -5,13 +5,15 @@
         <% if user_signed_in? %>
           <ul class="list-unstyled">
             <li class="pt-2">
-              <%= link_to "TOP", posts_path, class:"btn btn-success" %>
+              <%= link_to posts_path, class:"btn btn-success", "data-turbolinks": false do %>
+              <i class="fa-solid fa-map-location-dot"></i>TOP
+              <% end %>
           　</li>
             <li class="pt-2">
               <%= link_to "MY PAGE", user_path(current_user.id), class:"btn btn-success" %>
           　</li>
             <li class="pt-2">
-              <%= link_to "POST", new_post_path, class:"btn btn-success" %>
+              <%= link_to "POST", new_post_path, class:"btn btn-success", "data-turbolinks": false %>
             </li>
             <li class="pt-2">
               <%= link_to "LOG OUT", destroy_user_session_path, method: :delete, class:"btn btn-success" %>
