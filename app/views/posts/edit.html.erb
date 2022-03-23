@@ -93,7 +93,8 @@
 
   <%= f.label :text,"内容" %>
   <%= f.text_area :text, class: 'form-control',size: "20x10" %>
-　<%= f.submit %>
+  <%= f.submit "更新する", class:"btn btn-success" %>
+  <%= link_to "削除する", post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %>
 
 <% end %>
 

@@ -1,39 +1,35 @@
 <div class="jumbotron" style="background:url(<%= asset_path "001_1280_768.jpg" %>); background-size:cover;">
   <div class="container">
 
-<h2>ユーザー情報編集</h2>
-
- <div class="row">
-
- </div>
-
-
-</div>
-</div>
+<h2 class="header m-3 p-2">ユーザー情報編集</h2>
 
 <%= form_with model:@user, url: user_registration_path, local: true do |f| %>
  <div class="row">
-  <div class="col-sm-4 field">
+  <div class="col-sm-4 field m-3">
     <%= f.label :名前 %>
     <%= f.text_field :name, autofocus: true %>
   </div>
  </div>
 
    <div class="row">
-  <div class="col-sm-4 field">
+  <div class="col-sm-4 field m-3">
     <%= f.label :ユーザー画像 %>
   <%= f.attachment_field :user_image %>
   </div>
  </div>
 
-  <div class="field">
+  <div class="field m-3">
     <%= f.label :メールアドレス %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="actions">
+  <span class="actions m-3">
     <%= f.submit "登録", class:"btn btn-success" %>
-  </div>
+  </span>
+
+  <span class="actions m-3">
+    <%= link_to "退会する", users_unsubscribe_path, class:"btn btn-success" %>
+  </span>
 <% end %>
 
 

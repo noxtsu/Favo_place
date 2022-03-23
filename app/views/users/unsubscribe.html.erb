@@ -1,2 +1,14 @@
-<h1>Users#unsubscribe</h1>
-<p>Find me in app/views/users/unsubscribe.html.erb</p>
+<div class="jumbotron" style="background:url(<%= asset_path "001_1280_768.jpg" %>); background-size:cover;">
+  <div class="container">
+
+<h2 class="header m-3 p-2">退会しますか？</h2>
+
+  <span class="actions m-3">
+    <%= link_to "いいえ", posts_path, class:"btn btn-success" %>
+  </span>
+
+  <span class="actions m-3">
+    <%= link_to users_withdraw_path(@user, user: {is_active: true}), method: :patch, data: {confirm: "本当に退会しますか？"}, class:"btn btn-danger" do %>
+     退会する
+    <% end %>
+  </span>

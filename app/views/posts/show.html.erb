@@ -11,22 +11,7 @@
         
         <div id='map' style="height: 300px; width: 300px;"></div>
         
-        <script>
-        let map
-        function initMap(){
-          geocoder = new google.maps.Geocoder()
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: <% @post.latitude %>, lng: <% @post.longitude %> },
-            zoom: 12,
-          });
-          marker = new google.maps.Marker({
-            position:  {lat: <% @post.latitude %>, <% @post.longitude %>},
-            map: map
-          });
-        }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>
-      </div>
+    </div>
       <div class="col-md-8">
         <%= @post.text %>
       </div>
@@ -38,7 +23,7 @@
       
   <% if @post.favorited_by?(current_user) %>
     <p>
-      <%= link_to post_favorite_path(@post), method: :delete do %>
+      <%= link_to post_favorites_path(@post), method: :delete do %>
         ♥<%= @post.favorites.count %> いいね
       <% end %>
     </p>
@@ -73,20 +58,34 @@
         <%= f.submit "送信する" %>
       <% end %>
       </div>
-
-
-
       <%= link_to user_path(current_user.id), class:"btn btn-outline-secondary" do %>
         戻る
       <% end %>
     </div>
      </div>
 
-
-
-
-
-
-
   </div>
 </div>
+
+<style>
+.map {height: 300px; width: 300px;}
+</style>
+
+
+<script>
+        // let map ~[];
+        function initMap(){
+          console.log('initMap');
+          geocoder = new google.maps.Geocoder()
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
+            zoom: 12,
+          });
+          var marker = new google.maps.Marker({
+            position:  {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
+            map: map
+          });
+        }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxhu4tckgppQ5QhtBW6pzZGzCTL7ZDq0&callback=initMap" async defer></script>

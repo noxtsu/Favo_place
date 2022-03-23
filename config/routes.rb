@@ -22,9 +22,10 @@ Rails.application.routes.draw do
   #get 'users/show' => 'users#show', as: 'mypage'
   #get 'users/edit' => 'users#edit'
   #patch 'users' => 'customers#update'
-  resources :users, only: [:show, :edit, :update]
   get 'users/unsubscribe'
   get 'users/withdraw'
+  resources :users, only: [:show, :edit, :update]
+
 
   resources :posts do
   resources :comments, only:[:create, :destroy]
