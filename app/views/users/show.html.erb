@@ -28,8 +28,10 @@
         <%= link_to post_path(post.id), class:"btn btn-outline-secondary" do %>
       　　詳しく見る
       　<% end %>
-        <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
-          編集する
+        <% if post.user == current_user %>
+          <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
+            編集する
+          <% end %>
         <% end %>
       </div>
       <% end %>

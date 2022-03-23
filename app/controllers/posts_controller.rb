@@ -60,3 +60,4 @@ before_action :ensure_user, only: [:edit, :update, :destroy]
 
 
 end
+

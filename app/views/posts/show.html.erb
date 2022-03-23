@@ -5,7 +5,9 @@
     　<div class="post border border-info rounded m-3 p-2">
     　   <div class="post_userdata">
     　     <h2><%= @post.place_name %></h2>
-    　     <h2><%= @post.user.name %></h2>
+    　     <%= link_to user_path(@post.user.id) do %>
+    　       <%= @post.user.name %>
+    　     <% end %>
         </div>
         <div class="d-flex flex-row bd-highlight mb-3">
           <div><%= attachment_image_tag @post, :place_image, :fill, 300, 300, format:'jpeg' %></div>
@@ -25,13 +27,13 @@
         <% if @post.favorited_by?(current_user) %>
           <p>
             <%= link_to post_favorites_path(@post), method: :delete do %>
-              ♥<%= @post.favorites.count %> いいね
+             <%= image_tag 'star icon(yellow).jpeg' %><%= @post.favorites.count %> Favo!
             <% end %>
           </p>
           <% else %>
           <p>
             <%= link_to post_favorites_path(@post), method: :post do %>
-              ♡<%= @post.favorites.count %> いいね
+              <%= image_tag 'star icon.jpeg' %><%= @post.favorites.count %> Favo!
             <% end %>
           </p>
         <% end %>
@@ -39,29 +41,29 @@
         <div>
           <p>コメント件数：<%= @post.comments.count %></p>
           <% @post.comments.each do |comment| %>
-            <p></p>
-            <%= comment.user.name %><br>
-            <%= comment.comment %><br>
-            <%= comment.created_at.strftime('%Y/%m/%d') %>
-
-            <% if comment.user == current_user %>
-            <div>
-              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-            </div>
-            <% end %>
-          <% end %>
-          </div>
-
           <div>
-            <%= form_with(model:[@post, @comment], local: true) do |f| %>
-            <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
-            <%= f.submit "送信する" %>
+            <div><%= comment.user.name %></div>
+            <div><%= comment.comment %></div>
+            <tr>
+              <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+              <td>
+                <% if comment.user == current_user %>
+                  <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+                <% end %>
+              </td></tr>
             <% end %>
           </div>
-          <%= link_to user_path(current_user.id), class:"btn btn-outline-secondary" do %>
-            戻る
+        </div>
+        <div>
+          <%= form_with(model:[@post, @comment], local: true) do |f| %>
+          <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
           <% end %>
-          </div>
+        </div>
+        <%= link_to user_path(current_user.id), class:"btn btn-outline-secondary" do %>
+          戻る
+        <% end %>
+      </div>
     </div>
 
   </div>
@@ -73,19 +75,19 @@
 
 
 <script>
-        // let map ~[];
-        function initMap(){
-          console.log('initMap');
-          geocoder = new google.maps.Geocoder()
+  // let map ~[];
+  function initMap(){
+    console.log('initMap');
+    geocoder = new google.maps.Geocoder()
 
-          var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
-            zoom: 12,
-          });
-          var marker = new google.maps.Marker({
-            position:  {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
-            map: map
-          });
-        }
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
+      zoom: 12,
+    });
+    var marker = new google.maps.Marker({
+      position:  {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
+      map: map
+    });
+  }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
