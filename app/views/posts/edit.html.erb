@@ -84,9 +84,14 @@
 
       <%= f.label :text,"内容" %>
       <%= f.text_area :text, class: 'form-control',size: "20x10" %>
-      <%= f.submit "更新する", class:"btn btn-success" %>
-      <%= link_to "削除する", post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %>
-
+      <div class="d-flex justify-content-between">
+        <div>
+          <%= f.submit "更新する", class:"btn btn-success" %>
+        </div>
+        <div>
+          <%= link_to "削除する", post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-danger" %>
+        </div>
+      </div>
       <% end %>
 
     </div>

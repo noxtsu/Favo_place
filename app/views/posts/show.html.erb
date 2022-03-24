@@ -1,75 +1,98 @@
 <div class="container-fluid">
   <div class="row">
     <%= render 'posts/sidebar', posts: @posts %>
-    <div class="col-md-9">
-    　<div class="post border border-info rounded m-3 p-2">
-    　   <div class="post_userdata pb-3">
-    　     <h2><%= @post.place_name %></h2>
-    　     <%= link_to user_path(@post.user.id) do %>
-    　       <%= @post.user.name %>
+    <div class="col-md-9 post border border-info rounded m-3">
+    　<div class="post">
+    　   <div class="post_userdata">
+    　     <h1><%= @post.place_name %></h1>
+    　     <%= link_to user_path(@post.user.id), class:"text-decoration-none" do %>
+      　     <div class="d-flex justify-content-between">
+      　       <div>
+                <%= attachment_image_tag @post.user, :user_image, :fill, 30, 30, format:'jpeg', fallback: "user.jpeg" %>
+                <%= @post.user.name %>
+              </div>
     　     <% end %>
-        </div>
-
-        <div class="d-flex flex-row bd-highlight m-3">
-          <div><%= attachment_image_tag @post, :place_image, :fill, 300, 300, format:'jpeg' %></div>
-          <div id='map' style="height: 300px; width: 300px;"></div>
-        </div>
-        <div class="col-md-10">
-          <%= @post.text %>
-        </div>
-        <div class="post-edit">
-          <% if @post.user == current_user %>
-            <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
-              編集する
-            <% end %>
-          <% end %>
-        </div>
-        <div class="favorite-form">
-          <% if @post.favorited_by?(current_user) %>
-            <p>
-              <%= link_to post_favorites_path(@post), method: :delete do %>
-                <%= image_tag 'star icon(yellow).jpeg' %><%= @post.favorites.count %> Favo!
-              <% end %>
-            </p>
-            <% else %>
-            <p>
-              <%= link_to post_favorites_path(@post), method: :post do %>
-                <%= image_tag 'star icon.jpeg' %><%= @post.favorites.count %> Favo!
-              <% end %>
-            </p>
-          <% end %>
-        </div>
-
-        <div class="comment-index">
-          <p>コメント件数：<%= @post.comments.count %></p>
-          <% @post.comments.each do |comment| %>
-          <div>
-            <div><strong><%= comment.user.name %></strong></div>
-            <div><%= comment.comment %></div>
-            <tr>
-              <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
-              <td>
-                <% if comment.user == current_user %>
-                  <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+          　   <div>
+                <% if @post.user == current_user %>
+                  <%= link_to edit_post_path, class:"btn btn-outline-info" do %>
+                    投稿を編集する
+                  <% end %>
                 <% end %>
-              </td></tr>
+              </div>
+            </div>
+
+        <div class="d-flex flex-row justify-content-center bd-highlight m-3">
+          <div><%= attachment_image_tag @post, :place_image, :fill, 400, 400, format:'jpeg' %></div>
+          <div id='map' style="height: 400px; width: 400px;"></div>
+        </div>
+
+        <div class="col-md-9">
+          <div class=" border border-info rounded">
+            <div class="d-flex justify-content-center">
+              <%= @post.text %>
+            </div>
+          </div>
+        </div>
+
+        <div class="favorite-form m-3 d-flex">
+          <div class="favorite-form">
+            <% if user_signed_in? %>
+              <% if @post.favorited_by?(current_user) %>
+                <p>
+                  <%= link_to post_favorites_path(@post), method: :delete do %>
+                    <strong><%= image_tag 'star icon(yellow).jpeg' %><%= @post.favorites.count %> Favo!</strong>
+                  <% end %>
+                </p>
+                <% else %>
+                <p>
+                  <%= link_to post_favorites_path(@post), method: :post do %>
+                    <strong><%= image_tag 'star icon.jpeg' %><%= @post.favorites.count %> Favo!</strong>
+                  <% end %>
+                </p>
+              <% end %>
             <% end %>
           </div>
-        </div>
-        
-        <div class="comment-form">
-          <%= form_with(model:[@post, @comment], local: true) do |f| %>
-          <div class="mt-4">
-            <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
-            <%= f.submit "送信する", class:"btn btn-outline-success" %>
+          <div class="comment-index m-3">
+            <p>コメント件数：<%= @post.comments.count %></p>
+            <% @post.comments.each do |comment| %>
           </div>
+        </div>
+
+        <div class="comment-content">
+          <div><strong><%= comment.user.name %></strong></div>
+          <div><%= comment.comment %></div>
+          <tr>
+            <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+            <td>
+              <% if comment.user == current_user %>
+                <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+              <% end %>
+            </td></tr>
           <% end %>
         </div>
-        <div class="backbtn d-flex justify-content-end">
-          <%= link_to user_path(current_user.id), class:"btn btn-outline-secondary" do %>
-            戻る
+
+
+        <% if user_signed_in? %>
+          <div class="comment-form">
+            <%= form_with(model:[@post, @comment], local: true) do |f| %>
+            <div class="mt-4">
+              <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
+            </div>
+            <div class="mt-4 backbtn d-flex justify-content-between">
+              <div>
+              <%= f.submit "送信する", class:"btn btn-outline-success" %>
+            <% end %>
+        <% end %>
+              </div>
+              <div>
+            <% if user_signed_in? %>
+              <%= link_to posts_path(current_user.id), class:"btn btn-outline-secondary" do %>
+                戻る
+              <% end %>
           <% end %>
-        </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
 

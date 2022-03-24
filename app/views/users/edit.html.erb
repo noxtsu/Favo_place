@@ -1,6 +1,6 @@
 <div class="jumbotron" style="background:url(<%= asset_path "001_1280_768.jpg" %>); background-size:cover;">
   <div class="container">
-
+    <div class="registrations p-2 bg-light text-dark rounded">
 <h2 class="header m-3 p-2">ユーザー情報編集</h2>
 
 <%= form_with model:@user, url: user_registration_path, local: true do |f| %>
@@ -24,15 +24,15 @@
   </div>
 
   <span class="actions m-3">
-    <%= f.submit "登録", class:"btn btn-success" %>
+    <%= f.submit "更新する", class:"btn btn-success" %>
   </span>
 
   <span class="actions m-3">
-    <%= link_to "退会する", users_unsubscribe_path, class:"btn btn-success" %>
+    <%= link_to "退会する", users_unsubscribe_path, class:"btn btn-outline-danger" %>
   </span>
 <% end %>
 
-
+</div>
 </div>
 </div>
 
