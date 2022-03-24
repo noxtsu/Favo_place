@@ -47,11 +47,11 @@ before_action :ensure_user, only: [:edit, :update, :destroy]
   end
 
   private
-  
+
   def post_params
     params.require(:post).permit(:place_image, :place_name, :text, :address, :latitude, :longitude)
   end
-  
+
   def ensure_user
     @posts = current_user.posts
     @post = @posts.find_by(id: params[:id])

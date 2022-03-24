@@ -2,18 +2,20 @@
   <div class="row">
     <%= render 'posts/sidebar', posts: @posts %>
 
-    <div class="col-md-8">
-      <div class="userdata m-3 p-2">
-              <%= attachment_image_tag current_user, :user_image, :fill, 60, 60, format:'jpeg', fallback: "no-icon.jpeg" %>
-          <h3><%= @user.name %>さんのページ</h3>
-        <div class="user-edit">
-          <% if user_signed_in? && @user == current_user %>
-          <%= link_to "アカウント情報編集", edit_user_path, class: "user-edit-btn" %>
-          <% end %>
+    <div class="col-md-8 ">
+      <div class="d-flex border border-info rounded">
+        <div class="userdata m-3 p-2">
+          <%= attachment_image_tag current_user, :user_image, :fill, 60, 60, format:'jpeg', fallback: "user.jpeg" %>
         </div>
-
+        <div class="userdata m-3 p-2">
+          <h3><%= @user.name %>さんのページ</h3>
+          <div class="user-edit">
+            <% if user_signed_in? && @user == current_user %>
+            <%= link_to "アカウント情報編集", edit_user_path, class: "user-edit-btn" %>
+            <% end %>
+          </div>
+        </div>
       </div>
-
       <% @post.each do |post| %>
       <div class="post border border-info rounded m-3 p-2">
       <h3><%= post.place_name %></h3>
@@ -25,11 +27,11 @@
       <div class="col-md-8">
         <%= post.text %>
       </div>
-        <%= link_to post_path(post.id), class:"btn btn-outline-secondary" do %>
+        <%= link_to post_path(post.id), class:"btn btn-outline-info" do %>
       　　詳しく見る
       　<% end %>
         <% if post.user == current_user %>
-          <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
+          <%= link_to edit_post_path, class:"btn btn-outline-info" do %>
             編集する
           <% end %>
         <% end %>

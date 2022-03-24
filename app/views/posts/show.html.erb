@@ -3,46 +3,48 @@
     <%= render 'posts/sidebar', posts: @posts %>
     <div class="col-md-9">
     　<div class="post border border-info rounded m-3 p-2">
-    　   <div class="post_userdata">
+    　   <div class="post_userdata pb-3">
     　     <h2><%= @post.place_name %></h2>
     　     <%= link_to user_path(@post.user.id) do %>
     　       <%= @post.user.name %>
     　     <% end %>
         </div>
-        <div class="d-flex flex-row bd-highlight mb-3">
+
+        <div class="d-flex flex-row bd-highlight m-3">
           <div><%= attachment_image_tag @post, :place_image, :fill, 300, 300, format:'jpeg' %></div>
-
           <div id='map' style="height: 300px; width: 300px;"></div>
-
         </div>
         <div class="col-md-10">
           <%= @post.text %>
         </div>
-        <% if @post.user == current_user %>
-          <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
-            編集する
+        <div class="post-edit">
+          <% if @post.user == current_user %>
+            <%= link_to edit_post_path, class:"btn btn-outline-secondary" do %>
+              編集する
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+        <div class="favorite-form">
+          <% if @post.favorited_by?(current_user) %>
+            <p>
+              <%= link_to post_favorites_path(@post), method: :delete do %>
+                <%= image_tag 'star icon(yellow).jpeg' %><%= @post.favorites.count %> Favo!
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to post_favorites_path(@post), method: :post do %>
+                <%= image_tag 'star icon.jpeg' %><%= @post.favorites.count %> Favo!
+              <% end %>
+            </p>
+          <% end %>
+        </div>
 
-        <% if @post.favorited_by?(current_user) %>
-          <p>
-            <%= link_to post_favorites_path(@post), method: :delete do %>
-             <%= image_tag 'star icon(yellow).jpeg' %><%= @post.favorites.count %> Favo!
-            <% end %>
-          </p>
-          <% else %>
-          <p>
-            <%= link_to post_favorites_path(@post), method: :post do %>
-              <%= image_tag 'star icon.jpeg' %><%= @post.favorites.count %> Favo!
-            <% end %>
-          </p>
-        <% end %>
-
-        <div>
+        <div class="comment-index">
           <p>コメント件数：<%= @post.comments.count %></p>
           <% @post.comments.each do |comment| %>
           <div>
-            <div><%= comment.user.name %></div>
+            <div><strong><%= comment.user.name %></strong></div>
             <div><%= comment.comment %></div>
             <tr>
               <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
@@ -54,15 +56,20 @@
             <% end %>
           </div>
         </div>
-        <div>
+        
+        <div class="comment-form">
           <%= form_with(model:[@post, @comment], local: true) do |f| %>
-          <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
+          <div class="mt-4">
+            <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
+            <%= f.submit "送信する", class:"btn btn-outline-success" %>
+          </div>
           <% end %>
         </div>
-        <%= link_to user_path(current_user.id), class:"btn btn-outline-secondary" do %>
-          戻る
-        <% end %>
+        <div class="backbtn d-flex justify-content-end">
+          <%= link_to user_path(current_user.id), class:"btn btn-outline-secondary" do %>
+            戻る
+          <% end %>
+        </div>
       </div>
     </div>
 

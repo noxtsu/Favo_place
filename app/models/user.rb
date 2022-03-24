@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   attachment :user_image
 
+  validates :name, presence: true
+
   def active_for_authentication?
     super && (is_active == false)
   end
