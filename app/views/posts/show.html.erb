@@ -52,6 +52,7 @@
               <% end %>
             <% end %>
           </div>
+          
           <div class="comment-index m-3">
             <p>コメント件数：<%= @post.comments.count %></p>
             <% @post.comments.each do |comment| %>
@@ -73,15 +74,15 @@
 
 
         <% if user_signed_in? %>
-          <div class="comment-form">
-            <%= form_with(model:[@post, @comment], local: true) do |f| %>
-            <div class="mt-4">
-              <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
-            </div>
-            <div class="mt-4 backbtn d-flex justify-content-between">
-              <div>
-              <%= f.submit "送信する", class:"btn btn-outline-success" %>
-            <% end %>
+        <div class="comment-form">
+          <%= form_with(model:[@post, @comment], local: true) do |f| %>
+          <div class="mt-4">
+            <%= f.text_area :comment, size: "40x5", placeholder: "コメントをここに" %>
+          </div>
+          <div class="mt-4 d-flex justify-content-between">
+            <div>
+            <%= f.submit "送信する", class:"btn btn-success" %>
+          <% end %>
         <% end %>
               </div>
               <div>
@@ -93,6 +94,7 @@
               </div>
             </div>
           </div>
+          
       </div>
     </div>
 

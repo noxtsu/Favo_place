@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   attachment :user_image
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 2, maximum: 40 }
 
   def active_for_authentication?
     super && (is_active == false)

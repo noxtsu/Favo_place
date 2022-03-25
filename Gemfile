@@ -73,3 +73,5 @@ gem 'font-awesome-sass', '~> 5.13'
 gem 'dotenv-rails'
 
 gem 'font-awesome-rails'
+
+gem 'rails-i18n'
