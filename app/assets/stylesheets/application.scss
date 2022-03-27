@@ -1,9 +1,12 @@
+/*
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/v4-shims';
+*/
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -30,3 +33,4 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 body{
   font-family: 'Zen Kurenaido', sans-serif;
 }
+
