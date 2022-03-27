@@ -10,6 +10,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
+    if @user.update(post_params)
+      redirect_to user_path(@user.id)
+    else
+      render "edit"
+    end
   end
 
   def unsubscribe

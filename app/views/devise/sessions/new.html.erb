@@ -7,6 +7,7 @@
 
         <%= form_with model:@user, url: user_session_path, local:true do |f| %>
         <%= render 'layouts/error_messages', model: f.object %>
+        <%= alert %>
         <div class="field m-2">
           <%= f.label :メールアドレス %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

@@ -6,12 +6,7 @@
       <p>思い出の場所の名前と写真を決めて、地図検索で地図上でピンを刺したら、<br>
       その場所の思い出を綴ろう！</p>
   　　  <%= form_with model: @post, local:true do |f| %>
-  　　    <% if @post.errors.any? %>
-          <%= @post.errors.count %>件のエラーが発生しました<br>
-          <% @post.errors.full_messages.each do |message| %>
-          <%= message %>
-        <% end %>
-      <% end %>
+      <%= render 'layouts/error_messages', model: f.object %>
       <div class="actions">
         <%= f.label :place_name,"場所の名前" %>
         <%= f.text_field :place_name %>

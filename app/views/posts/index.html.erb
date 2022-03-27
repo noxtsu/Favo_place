@@ -17,9 +17,9 @@ function initMap(){
   console.log('initMap');
   geocoder = new google.maps.Geocoder()
 
-  //初期表示位置,
+
   let latlng = new google.maps.LatLng(37.97741063355745, 138.97084644902964);
-  //デザイン
+
   let styles = [
        {
         stylers: [
@@ -36,7 +36,7 @@ function initMap(){
   });
   let transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
-  //複数マーカー ここから
+
     <% @posts.each do |post|%>
     ( function() {
     var markerLatLng = new google.maps.LatLng({lat: <%= post.latitude %>, lng: <%= post.longitude %>}); // 緯度経度のデータ作成
@@ -44,17 +44,17 @@ function initMap(){
       position: markerLatLng,
       map: map
     });
-  　//マーカーをクリックしたとき、詳細情報を表示
+
     var infowindow = new google.maps.InfoWindow({
       position: markerLatLng,
       content: "<a href='<%= post_url(post.id) %>' target='_blank'><%= post.place_name %></a>"
-    }); //ここで詳細ページへのリンクを表示させる
+    }); 
     marker.addListener('click', function() {
       infowindow.open(map, marker);
       });
    })();
   <% end %>
-        //複数マーカー ここまで
+        
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
