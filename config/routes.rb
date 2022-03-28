@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   #}
  #  devise_for :users, controllers: {registrations: 'users/registrations'}
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
   } do
+    
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   member do
     get :follows, :followers
