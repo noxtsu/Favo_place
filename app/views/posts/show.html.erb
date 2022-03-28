@@ -40,13 +40,13 @@
               <% if @post.favorited_by?(current_user) %>
                 <p>
                   <%= link_to post_favorites_path(@post), method: :delete do %>
-                    <strong><%= image_tag 'star icon(yellow).jpeg' %><%= @post.favorites.count %> Favo!</strong>
+                    <strong><%= image_tag 'star icon(yellow).jpg' %><%= @post.favorites.count %> Favo!</strong>
                   <% end %>
                 </p>
                 <% else %>
                 <p>
                   <%= link_to post_favorites_path(@post), method: :post do %>
-                    <strong><%= image_tag 'star icon.jpeg' %><%= @post.favorites.count %> Favo!</strong>
+                    <strong><%= image_tag 'star icon.jpg' %><%= @post.favorites.count %> Favo!</strong>
                   <% end %>
                 </p>
               <% end %>
