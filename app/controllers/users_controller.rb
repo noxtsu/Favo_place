@@ -23,8 +23,9 @@ class UsersController < ApplicationController
   end
 
   def withdraw
-    @user = current_user
-    @user.update(post_params)
+    #@user = current_user
+    #@user.update(post_params)
+    current_user.update(is_active: true)
     reset_session
     redirect_to root_path
   end

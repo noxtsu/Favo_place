@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # sessions: 'users/sessions'
   #}
  #  devise_for :users, controllers: {registrations: 'users/registrations'}
+ 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
